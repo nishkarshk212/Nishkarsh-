@@ -76,23 +76,28 @@ class Language:
                 )
                 
                 if fallen:
-                    logger.info(f"Update received: {type(fallen).__name__}")
+                    logger.info(f"Update received: {type(fallen).__name__} from {fallen.from_user.id if fallen.from_user else 'None'}")
                 else:
                     logger.info("Update received but no chat/message found")
 
                 if not fallen.from_user:
+                    logger.info("Ignoring update: No from_user")
                     return
 
                 if hasattr(fallen, "chat"):
                     chat = fallen.chat
                 elif hasattr(fallen, "message"):
                     chat = fallen.message.chat
+                
+                logger.info(f"Processing update for chat: {chat.id}")
 
                 if chat.id in db.blacklisted:
                     logger.warning(f"Chat {chat.id} is blacklisted, leaving...")
                     return await chat.leave()
 
+                logger.info(f"Fetching language for chat: {chat.id}")
                 lang_code = await db.get_lang(chat.id)
+                logger.info(f"Language found: {lang_code}")
                 lang_dict = self.languages[lang_code]
 
                 setattr(fallen, "lang", lang_dict)
