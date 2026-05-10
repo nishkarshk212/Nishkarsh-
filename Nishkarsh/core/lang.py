@@ -74,6 +74,11 @@ class Language:
                     ),
                     None,
                 )
+                
+                if fallen:
+                    logger.info(f"Update received: {type(fallen).__name__}")
+                else:
+                    logger.info("Update received but no chat/message found")
 
                 if not fallen.from_user:
                     return
