@@ -4,6 +4,7 @@
 #ALONE-CODER
 
 import asyncio
+import random
 from pyrogram import enums, filters, types
 
 from Nishkarsh import app, config, db, lang
@@ -37,8 +38,13 @@ async def start(_, message: types.Message):
     )
 
     key = buttons.start_key(message.lang, private)
+    _img = (
+        random.choice(config.START_IMG)
+        if isinstance(config.START_IMG, list)
+        else config.START_IMG
+    )
     await message.reply_photo(
-        photo=config.START_IMG,
+        photo=_img,
         caption=_text,
         reply_markup=key,
         quote=not private,
