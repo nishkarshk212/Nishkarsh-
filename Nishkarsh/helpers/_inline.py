@@ -4,7 +4,6 @@
 
 
 from pyrogram import enums, types
-from pyrogram.enums import ButtonStyle
 
 from Nishkarsh import app, config, lang
 from Nishkarsh.core.lang import lang_codes
@@ -33,17 +32,17 @@ class Inline:
             )
         elif timer:
             keyboard.append(
-                [self.ikb(text=timer, callback_data=f"controls status {chat_id}", style=ButtonStyle.PRIMARY)]
+                [self.ikb(text=timer, callback_data=f"controls status {chat_id}")]
             )
 
         if not remove:
             keyboard.append(
                 [
-                    self.ikb(text="▷", callback_data=f"controls resume {chat_id}", style=ButtonStyle.SUCCESS),
-                    self.ikb(text="II", callback_data=f"controls pause {chat_id}", style=ButtonStyle.SUCCESS),
-                    self.ikb(text="⥁", callback_data=f"controls replay {chat_id}", style=ButtonStyle.PRIMARY),
-                    self.ikb(text="‣‣I", callback_data=f"controls skip {chat_id}", style=ButtonStyle.DANGER),
-                    self.ikb(text="▢", callback_data=f"controls stop {chat_id}", style=ButtonStyle.DANGER),
+                    self.ikb(text="▷", callback_data=f"controls resume {chat_id}"),
+                    self.ikb(text="II", callback_data=f"controls pause {chat_id}"),
+                    self.ikb(text="⥁", callback_data=f"controls replay {chat_id}"),
+                    self.ikb(text="‣‣I", callback_data=f"controls skip {chat_id}"),
+                    self.ikb(text="▢", callback_data=f"controls stop {chat_id}"),
                 ]
             )
             if not _lang:
