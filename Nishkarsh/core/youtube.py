@@ -9,7 +9,7 @@ import asyncio
 import aiohttp
 import random
 from py_yt import Playlist, VideosSearch
-from Nishkarsh import config, logger
+from Nishkarsh import config, db, logger
 from Nishkarsh.helpers import Track, utils
 
 API_SONG = config.NEXTGEN_API_SONG
