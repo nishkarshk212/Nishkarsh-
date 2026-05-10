@@ -97,7 +97,11 @@ class TgCall(PyTgCalls):
                         ),
                         reply_markup=keyboard,
                     )
-                except MessageIdInvalid:
+                except Exception:
+                    try:
+                        await message.delete()
+                    except:
+                        pass
                     media.message_id = (await app.send_photo(
                         chat_id=chat_id,
                         photo=_thumb,
