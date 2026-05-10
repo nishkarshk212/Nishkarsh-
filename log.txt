@@ -1,0 +1,288 @@
+[10-May-26 23:43:28 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:43:28 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:44:37 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:44:37 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:44:43 - INFO] - Nishkarsh: Database connection successful. (1.26s)
+[10-May-26 23:44:43 - INFO] - Nishkarsh: Migrating users and chats from old collections...
+[10-May-26 23:44:43 - INFO] - Nishkarsh: Migration completed.
+[10-May-26 23:44:44 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:45:35 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:45:35 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:45:36 - INFO] - Nishkarsh: Database connection successful. (0.99s)
+[10-May-26 23:45:37 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:46:20 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:46:20 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:46:21 - INFO] - Nishkarsh: Database connection successful. (1.14s)
+[10-May-26 23:46:22 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:46:22 - WARNING] - Nishkarsh: Bot has failed to access the log group: -1003757375746
+Reason: Telegram says: [400 CHANNEL_INVALID] - The provided channel is invalid. (caused by "channels.GetChannels")
+[10-May-26 23:46:22 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[10-May-26 23:46:24 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[10-May-26 23:46:24 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[10-May-26 23:46:24 - INFO] - Nishkarsh: Loaded 21 modules.
+[10-May-26 23:46:24 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[10-May-26 23:47:06 - ERROR] - pyrogram.dispatcher: Unexpected exception raised in MessageHandler:
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 429, in handler_worker
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/lang.py", line 95, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/plugins/start.py", line 39, in start
+    key = buttons.start_key(message.lang, private)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/helpers/_inline.py", line 192, in start_key
+    self.ikb(text=lang["nishkarshowner"], user_id=config.OWNER_ID, style=ButtonStyle.DANGER),
+                  ~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'nishkarshowner'
+[10-May-26 23:50:27 - INFO] - Nishkarsh: Stopping...
+[10-May-26 23:50:27 - INFO] - Nishkarsh: Bot stopped.
+[10-May-26 23:50:27 - INFO] - Nishkarsh: Assistants stopped.
+[10-May-26 23:50:27 - INFO] - Nishkarsh: Database connection closed.
+[10-May-26 23:50:27 - INFO] - Nishkarsh: Stopped.
+
+[10-May-26 23:50:30 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:50:30 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:50:32 - INFO] - Nishkarsh: Database connection successful. (1.07s)
+[10-May-26 23:50:32 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:50:33 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[10-May-26 23:50:35 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[10-May-26 23:50:35 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[10-May-26 23:50:35 - INFO] - Nishkarsh: Loaded 21 modules.
+[10-May-26 23:50:35 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[10-May-26 23:50:49 - ERROR] - pyrogram.dispatcher: Unexpected exception raised in MessageHandler:
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 429, in handler_worker
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/lang.py", line 95, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/plugins/start.py", line 39, in start
+    key = buttons.start_key(message.lang, private)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/helpers/_inline.py", line 192, in start_key
+    self.ikb(text=lang["nishkarshowner"], user_id=config.OWNER_ID, style=ButtonStyle.DANGER),
+                  ~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'nishkarshowner'
+[10-May-26 23:51:11 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:51:11 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:51:12 - INFO] - Nishkarsh: Database connection successful. (0.98s)
+[10-May-26 23:51:12 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:51:26 - ERROR] - pyrogram.dispatcher: Unexpected exception raised in MessageHandler:
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 429, in handler_worker
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/lang.py", line 95, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/plugins/start.py", line 39, in start
+    key = buttons.start_key(message.lang, private)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/helpers/_inline.py", line 192, in start_key
+    self.ikb(text=lang["nishkarshowner"], user_id=config.OWNER_ID, style=ButtonStyle.DANGER),
+                  ~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'nishkarshowner'
+[10-May-26 23:51:28 - INFO] - Nishkarsh: Stopping...
+[10-May-26 23:51:28 - INFO] - Nishkarsh: Bot stopped.
+[10-May-26 23:51:28 - INFO] - Nishkarsh: Assistants stopped.
+[10-May-26 23:51:28 - INFO] - Nishkarsh: Database connection closed.
+[10-May-26 23:51:28 - INFO] - Nishkarsh: Stopped.
+
+[10-May-26 23:51:32 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:51:33 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:51:34 - INFO] - Nishkarsh: Database connection successful. (1.06s)
+[10-May-26 23:51:34 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:51:41 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[10-May-26 23:51:43 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[10-May-26 23:51:43 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[10-May-26 23:51:43 - INFO] - Nishkarsh: Loaded 21 modules.
+[10-May-26 23:51:43 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[10-May-26 23:56:05 - INFO] - Nishkarsh: Stopping...
+[10-May-26 23:56:05 - INFO] - Nishkarsh: Bot stopped.
+[10-May-26 23:56:05 - INFO] - Nishkarsh: Assistants stopped.
+[10-May-26 23:56:05 - INFO] - Nishkarsh: Database connection closed.
+[10-May-26 23:56:05 - INFO] - Nishkarsh: Stopped.
+
+[10-May-26 23:56:06 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:56:06 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:56:08 - INFO] - Nishkarsh: Database connection successful. (1.18s)
+[10-May-26 23:56:08 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:56:15 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[10-May-26 23:56:17 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[10-May-26 23:56:17 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[10-May-26 23:56:17 - INFO] - Nishkarsh: Loaded 21 modules.
+[10-May-26 23:56:17 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[10-May-26 23:56:24 - ERROR] - pyrogram.dispatcher: Unexpected exception raised in MessageHandler:
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 429, in handler_worker
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/lang.py", line 95, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/plugins/start.py", line 40, in start
+    await message.reply_photo(
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/types/messages_and_media/message.py", line 4859, in reply_photo
+    return await self._client.send_photo(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/messages/send_photo.py", line 285, in send_photo
+    r = await self.invoke(
+        ^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/advanced/invoke.py", line 107, in invoke
+    r = await session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/session/session.py", line 551, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/session/session.py", line 514, in send
+    RPCError.raise_it(result, type(data))
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/errors/rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ButtonUrlInvalid: Telegram says: [400 BUTTON_URL_INVALID] - The button url is invalid. (caused by "messages.SendMedia")
+[10-May-26 23:58:39 - INFO] - Nishkarsh: Cache directories updated.
+[10-May-26 23:58:39 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[10-May-26 23:58:40 - INFO] - Nishkarsh: Database connection successful. (1.14s)
+[10-May-26 23:58:41 - INFO] - Nishkarsh: Database cache loaded.
+[10-May-26 23:58:42 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[10-May-26 23:58:43 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[10-May-26 23:58:44 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[10-May-26 23:58:44 - INFO] - Nishkarsh: Loaded 21 modules.
+[10-May-26 23:58:44 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[11-May-26 00:01:19 - INFO] - Nishkarsh: Stopping...
+[11-May-26 00:01:19 - INFO] - Nishkarsh: Bot stopped.
+[11-May-26 00:01:19 - INFO] - Nishkarsh: Assistants stopped.
+[11-May-26 00:01:19 - INFO] - Nishkarsh: Database connection closed.
+[11-May-26 00:01:19 - INFO] - Nishkarsh: Stopped.
+
+[11-May-26 00:03:06 - INFO] - Nishkarsh: Cache directories updated.
+[11-May-26 00:03:06 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[11-May-26 00:03:08 - INFO] - Nishkarsh: Database connection successful. (1.16s)
+[11-May-26 00:03:08 - INFO] - Nishkarsh: Database cache loaded.
+[11-May-26 00:03:09 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[11-May-26 00:03:11 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[11-May-26 00:03:11 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[11-May-26 00:03:11 - INFO] - Nishkarsh: Loaded 21 modules.
+[11-May-26 00:03:11 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[11-May-26 00:08:52 - ERROR] - pyrogram.dispatcher: Unexpected exception raised in CallbackQueryHandler:
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 429, in handler_worker
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/lang.py", line 95, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/plugins/callbacks.py", line 138, in _help
+    text=query.lang[f"help_{data[1]}"],
+         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'help_close'
+[11-May-26 00:11:55 - INFO] - Nishkarsh: Stopping...
+[11-May-26 00:11:55 - INFO] - Nishkarsh: Bot stopped.
+[11-May-26 00:11:55 - INFO] - Nishkarsh: Assistants stopped.
+[11-May-26 00:11:55 - INFO] - Nishkarsh: Database connection closed.
+[11-May-26 00:11:55 - INFO] - Nishkarsh: Stopped.
+
+[11-May-26 00:25:27 - INFO] - Nishkarsh: Cache directories updated.
+[11-May-26 00:25:27 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[11-May-26 00:25:29 - INFO] - Nishkarsh: Database connection successful. (1.17s)
+[11-May-26 00:25:29 - INFO] - Nishkarsh: Database cache loaded.
+[11-May-26 00:25:30 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[11-May-26 00:25:32 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[11-May-26 00:25:32 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[11-May-26 00:25:32 - INFO] - Nishkarsh: Loaded 21 modules.
+[11-May-26 00:25:32 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[11-May-26 00:31:00 - INFO] - Nishkarsh: Stopping...
+[11-May-26 00:31:00 - INFO] - Nishkarsh: Bot stopped.
+[11-May-26 00:31:00 - INFO] - Nishkarsh: Assistants stopped.
+[11-May-26 00:31:00 - INFO] - Nishkarsh: Database connection closed.
+[11-May-26 00:31:00 - INFO] - Nishkarsh: Stopped.
+
+[11-May-26 00:31:12 - INFO] - Nishkarsh: Cache directories updated.
+[11-May-26 00:31:12 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[11-May-26 00:31:13 - INFO] - Nishkarsh: Database connection successful. (1.25s)
+[11-May-26 00:31:14 - INFO] - Nishkarsh: Database cache loaded.
+[11-May-26 00:31:15 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[11-May-26 00:31:17 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[11-May-26 00:31:17 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[11-May-26 00:31:17 - INFO] - Nishkarsh: Loaded 21 modules.
+[11-May-26 00:31:18 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[11-May-26 00:32:00 - ERROR] - pyrogram.dispatcher: Unexpected exception raised in MessageHandler:
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 429, in handler_worker
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/lang.py", line 90, in wrapper
+    lang_code = await db.get_lang(chat.id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/lily_music/AloneX/Nishkarsh/core/mongo.py", line 222, in get_lang
+    doc = await self.langdb.find_one({"_id": chat_id})
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/collection.py", line 1756, in find_one
+    async for result in cursor.limit(-1):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/cursor.py", line 1291, in __anext__
+    return await self.next()
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/cursor.py", line 1267, in next
+    if len(self._data) or await self._refresh():
+                          ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/cursor.py", line 1215, in _refresh
+    await self._send_message(q)
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/cursor.py", line 1110, in _send_message
+    response = await client._run_operation(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/_csot.py", line 115, in csot_wrapper
+    return await func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 1942, in _run_operation
+    return await self._retryable_read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 2052, in _retryable_read
+    return await self._retry_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/_csot.py", line 115, in csot_wrapper
+    return await func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 2007, in _retry_internal
+    return await _ClientConnectionRetryable(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 2773, in run
+    return await self._read() if self._is_read else await self._write()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 2918, in _read
+    self._server = await self._get_server()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 2866, in _get_server
+    return await self._client._select_server(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/mongo_client.py", line 1837, in _select_server
+    server = await topology.select_server(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/topology.py", line 428, in select_server
+    server = await self._select_server(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/topology.py", line 402, in _select_server
+    servers = await self.select_servers(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/topology.py", line 298, in select_servers
+    server_descriptions = await self._select_servers_loop(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pymongo/asynchronous/topology.py", line 359, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: ac-f1nx3no-shard-00-01.tgb2mex.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),ac-f1nx3no-shard-00-02.tgb2mex.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),ac-f1nx3no-shard-00-00.tgb2mex.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 12.5s, Topology Description: <TopologyDescription id: 6a00d5f820cdd4f2bad84c93, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-f1nx3no-shard-00-00.tgb2mex.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('ac-f1nx3no-shard-00-00.tgb2mex.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-f1nx3no-shard-00-01.tgb2mex.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('ac-f1nx3no-shard-00-01.tgb2mex.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-f1nx3no-shard-00-02.tgb2mex.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('ac-f1nx3no-shard-00-02.tgb2mex.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+[11-May-26 00:33:47 - INFO] - Nishkarsh: Stopping...
+[11-May-26 00:33:47 - INFO] - Nishkarsh: Bot stopped.
+[11-May-26 00:33:47 - INFO] - Nishkarsh: Assistants stopped.
+[11-May-26 00:33:47 - INFO] - Nishkarsh: Database connection closed.
+[11-May-26 00:33:47 - INFO] - Nishkarsh: Stopped.
+
+[11-May-26 00:34:10 - INFO] - Nishkarsh: Cache directories updated.
+[11-May-26 00:34:10 - INFO] - Nishkarsh: Loaded languages: zh, ja, de, ru, pt, en, pa, my, fr, hi, es, ar
+[11-May-26 00:34:12 - INFO] - Nishkarsh: Database connection successful. (1.61s)
+[11-May-26 00:34:12 - INFO] - Nishkarsh: Database cache loaded.
+[11-May-26 00:34:13 - INFO] - Nishkarsh: Bot started as @Music_242_bot
+[11-May-26 00:34:15 - INFO] - Nishkarsh: Assistant 1 started as @lilyy_assistant
+[11-May-26 00:34:15 - INFO] - Nishkarsh: PyTgCalls client(s) started.
+[11-May-26 00:34:15 - INFO] - Nishkarsh: Loaded 21 modules.
+[11-May-26 00:34:15 - INFO] - Nishkarsh: Loaded 1 sudo users.
+[11-May-26 00:38:50 - INFO] - Nishkarsh: Stopping...
+[11-May-26 00:38:50 - INFO] - Nishkarsh: Bot stopped.
+[11-May-26 00:38:50 - INFO] - Nishkarsh: Assistants stopped.
+[11-May-26 00:38:50 - INFO] - Nishkarsh: Database connection closed.
+[11-May-26 00:38:50 - INFO] - Nishkarsh: Stopped.
+

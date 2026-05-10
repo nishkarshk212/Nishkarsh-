@@ -19,8 +19,8 @@ class Config:
         self.SESSION2 = getenv("SESSION2", None)
         self.SESSION3 = getenv("SESSION3", None)
 
-        self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/AloneUpdates")
-        self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/AloneBotSupport")
+        self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Tele_212_bots")
+        self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/jayden_clan")
 
         self.AUTO_END: bool = getenv("AUTO_END", False)
         self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", False)
@@ -36,6 +36,10 @@ class Config:
         self.DEFAULT_THUMB = getenv("DEFAULT_THUMB", "https://te.legra.ph/file/3e40a408286d4eda24191.jpg")
         self.PING_IMG = getenv("PING_IMG", "https://files.catbox.moe/haagg2.png")
         self.START_IMG = getenv("START_IMG", "https://files.catbox.moe/zvziwk.jpg")
+
+        self.NEXTGEN_API_KEY = getenv("NEXTGEN_API_KEY", "NxGBNexGenBots08f955")
+        self.NEXTGEN_API_SONG = getenv("NEXTGEN_API_SONG", "https://pvtz.nexgenbots.xyz/song/")
+        self.NEXTGEN_API_VIDEO = getenv("NEXTGEN_API_VIDEO", "https://pvtz.nexgenbots.xyz/video/")
 
     def check(self):
         missing = [
