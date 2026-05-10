@@ -131,7 +131,7 @@ class TgCall(PyTgCalls):
 
         media = queue.get_current(chat_id)
         _lang = await lang.get_lang(chat_id)
-        msg = await app.send_message(chat_id=chat_id, text=_lang["play_again"])
+        msg = await app.send_message(chat_id=chat_id, text=_lang["play_again"], disable_web_page_preview=True)
         await self.play_media(chat_id, msg, media)
 
 
@@ -152,7 +152,7 @@ class TgCall(PyTgCalls):
             return await self.stop(chat_id)
 
         _lang = await lang.get_lang(chat_id)
-        msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"])
+        msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"], disable_web_page_preview=True)
         if not media.file_path:
             media.file_path = await yt.download(media.id, video=media.video)
             if not media.file_path:

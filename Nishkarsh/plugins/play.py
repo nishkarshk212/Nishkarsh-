@@ -100,6 +100,7 @@ async def play_hndlr(
                     file.duration,
                     m.from_user.mention,
                 ),
+                disable_web_page_preview=True,
                 reply_markup=buttons.play_queued(
                     m.chat.id, file.id, m.lang["play_now"]
                 ),
@@ -109,6 +110,7 @@ async def play_hndlr(
                 await app.send_message(
                     chat_id=m.chat.id,
                     text=m.lang["playlist_queued"].format(len(tracks)) + added,
+                    disable_web_page_preview=True,
                 )
             
             # Download queued song in background
@@ -138,4 +140,5 @@ async def play_hndlr(
     await app.send_message(
         chat_id=m.chat.id,
         text=m.lang["playlist_queued"].format(len(tracks)) + added,
+        disable_web_page_preview=True,
     )
