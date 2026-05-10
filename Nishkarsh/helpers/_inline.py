@@ -186,7 +186,7 @@ class Inline:
                     self.ikb(text=lang["nishkarshowner"], user_id=config.OWNER_ID),
                     self.ikb(
                         text=lang["source"],
-                        url="https://github.com/TeamNishkarshOp/Nishkarsh"
+                        url="https://github.com/nishkarshk212/Nishkarsh-.git"
                     )
                 ]
             ]
