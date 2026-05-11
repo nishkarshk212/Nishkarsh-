@@ -3,6 +3,7 @@
 # This file is part of NishkarshMusic
 
 
+import asyncio
 import re
 
 from pyrogram import filters, types
@@ -80,6 +81,16 @@ async def _controls(_, query: types.CallbackQuery):
         msg = await app.send_message(chat_id=chat_id, text=query.lang["play_next"])
         if not media.file_path:
             media.file_path = await yt.download(media.id, video=media.video)
+        
+        if not media.file_path:
+            await msg.edit_text(f"Download failed for **{media.title}**. Skipping track...")
+            await asyncio.sleep(2)
+            try:
+                await msg.delete()
+            except:
+                pass
+            return await anon.play_next(chat_id)
+
         media.message_id = msg.id
         return await anon.play_media(chat_id, msg, media)
 
