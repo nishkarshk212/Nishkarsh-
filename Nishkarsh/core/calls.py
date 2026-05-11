@@ -3,6 +3,7 @@
 # This file is part of NishkarshMusic
 # ALONE-CODER
 
+import asyncio
 from ntgcalls import (ConnectionNotFound, TelegramServerError,
                       RTMPStreamingUnsupported)
 from pyrogram.errors import MessageIdInvalid
@@ -137,6 +138,9 @@ class TgCall(PyTgCalls):
 
     async def play_next(self, chat_id: int) -> None:
         media = queue.get_next(chat_id)
+        if not media:
+            return await self.stop(chat_id)
+
         try:
             if media.message_id:
                 await app.delete_messages(
@@ -148,18 +152,20 @@ class TgCall(PyTgCalls):
         except:
             pass
 
-        if not media:
-            return await self.stop(chat_id)
-
         _lang = await lang.get_lang(chat_id)
         msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"], disable_web_page_preview=True)
         if not media.file_path:
             media.file_path = await yt.download(media.id, video=media.video)
             if not media.file_path:
-                await self.stop(chat_id)
-                return await msg.edit_text(
-                    _lang["error_no_file"].format(config.SUPPORT_CHAT)
+                await msg.edit_text(
+                    f"Download failed for **{media.title}**. Skipping to next track..."
                 )
+                await asyncio.sleep(2)
+                try:
+                    await msg.delete()
+                except:
+                    pass
+                return await self.play_next(chat_id)
 
         media.message_id = msg.id
         await self.play_media(chat_id, msg, media)
