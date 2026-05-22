@@ -3,10 +3,18 @@
 # This file is part of NishkarshMusic
 
 
+import random
 import pyrogram
+from pyrogram.enums import ChatAction
 
 from Nishkarsh import config, logger
 
+EMOJIS = [
+    "👍", "❤️", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "🌚", "🌭", "💯", "🤣", "⚡️", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "🍿", "🦍", "⚡️", "☃️", "⛄️", "🗿", "🆒", "🙊", "🦄", "🍭", "👾", "🫥", "💊", "💋", "🐳",
+    # Premium Emojis (Custom Emoji IDs)
+    5431466076986203243, 5431113032587071029, 5431154563821915354, 5431327142491503373, 5431260907267469614,
+    5431458231423131811, 5431319200845318850, 5431113032587071029, 5431057813585054358, 5431113032587071029
+]
 
 class Bot(pyrogram.Client):
     def __init__(self):
@@ -22,6 +30,54 @@ class Bot(pyrogram.Client):
         self.logger = config.LOGGER_ID
         self.bl_users = pyrogram.filters.user()
         self.sudoers = pyrogram.filters.user(self.owner)
+
+    async def send_reaction(self, chat_id, message_id, emoji=None):
+        if emoji is None:
+            emoji = random.choice(EMOJIS)
+        try:
+            return await super().send_reaction(chat_id, message_id, emoji)
+        except Exception:
+            pass
+
+    async def send_message(self, *args, **kwargs):
+        msg = await super().send_message(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_photo(self, *args, **kwargs):
+        msg = await super().send_photo(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_video(self, *args, **kwargs):
+        msg = await super().send_video(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_audio(self, *args, **kwargs):
+        msg = await super().send_audio(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_document(self, *args, **kwargs):
+        msg = await super().send_document(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_voice(self, *args, **kwargs):
+        msg = await super().send_voice(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_animation(self, *args, **kwargs):
+        msg = await super().send_animation(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
+
+    async def send_sticker(self, *args, **kwargs):
+        msg = await super().send_sticker(*args, **kwargs)
+        await self.send_reaction(msg.chat.id, msg.id)
+        return msg
 
     async def boot(self):
         """
