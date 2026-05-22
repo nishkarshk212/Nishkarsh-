@@ -10,10 +10,7 @@ from pyrogram.enums import ChatAction
 from Nishkarsh import config, logger
 
 EMOJIS = [
-    "👍", "❤️", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "🌚", "🌭", "💯", "🤣", "⚡️", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "🍿", "🦍", "⚡️", "☃️", "⛄️", "🗿", "🆒", "🙊", "🦄", "🍭", "👾", "🫥", "💊", "💋", "🐳",
-    # Premium Emojis (Custom Emoji IDs)
-    5431466076986203243, 5431113032587071029, 5431154563821915354, 5431327142491503373, 5431260907267469614,
-    5431458231423131811, 5431319200845318850, 5431113032587071029, 5431057813585054358, 5431113032587071029
+    "👍", "❤️", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "🌚", "🌭", "💯", "🤣", "⚡️", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "🍿", "🦍", "⚡️", "☃️", "⛄️", "🗿", "🆒", "🙊", "🦄", "🍭", "👾", "🫥", "💊", "💋", "🐳"
 ]
 
 class Bot(pyrogram.Client):
@@ -36,7 +33,8 @@ class Bot(pyrogram.Client):
             emoji = random.choice(EMOJIS)
         try:
             return await super().send_reaction(chat_id, message_id, emoji)
-        except Exception:
+        except Exception as e:
+            logger.error(f"Error sending reaction: {e}")
             pass
 
     async def send_message(self, *args, **kwargs):
