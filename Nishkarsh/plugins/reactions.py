@@ -8,12 +8,12 @@ async def auto_reaction(_, message):
     if not message.from_user:
         return
     
-    # Avoid reacting to self if it somehow triggers
+    # Avoid reacting to self
     if message.from_user.id == app.id:
         return
 
     try:
-        await app.send_reaction(message.chat.id, message.id)
+        await message.react(random.choice(EMOJIS))
     except Exception as e:
-        logger.error(f"Plugin reaction error: {e}")
+        # Don't log for every message if it fails (e.g. in channels)
         pass

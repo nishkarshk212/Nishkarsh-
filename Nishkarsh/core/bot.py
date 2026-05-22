@@ -32,7 +32,7 @@ class Bot(pyrogram.Client):
         if emoji is None:
             emoji = random.choice(EMOJIS)
         try:
-            return await super().send_reaction(chat_id, message_id, emoji)
+            return await super().send_reaction(chat_id, message_id, [emoji] if isinstance(emoji, str) else emoji)
         except Exception as e:
             logger.error(f"Error sending reaction: {e}")
             pass
