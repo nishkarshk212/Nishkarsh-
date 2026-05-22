@@ -32,49 +32,78 @@ class Bot(pyrogram.Client):
         if emoji is None:
             emoji = random.choice(EMOJIS)
         try:
-            return await super().send_reaction(chat_id, message_id, [emoji] if isinstance(emoji, str) else emoji)
+            return await super().send_reaction(chat_id, message_id, emoji)
         except Exception as e:
-            logger.error(f"Error sending reaction: {e}")
+            # We'll try one more way if super() fails
+            try:
+                from pyrogram.types import ReactionTypeEmoji
+                return await super().send_reaction(chat_id, message_id, ReactionTypeEmoji(emoji=emoji))
+            except:
+                pass
             pass
 
     async def send_message(self, *args, **kwargs):
         msg = await super().send_message(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_photo(self, *args, **kwargs):
         msg = await super().send_photo(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_video(self, *args, **kwargs):
         msg = await super().send_video(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_audio(self, *args, **kwargs):
         msg = await super().send_audio(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_document(self, *args, **kwargs):
         msg = await super().send_document(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_voice(self, *args, **kwargs):
         msg = await super().send_voice(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_animation(self, *args, **kwargs):
         msg = await super().send_animation(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def send_sticker(self, *args, **kwargs):
         msg = await super().send_sticker(*args, **kwargs)
-        await self.send_reaction(msg.chat.id, msg.id)
+        try:
+            await msg.react(random.choice(EMOJIS))
+        except:
+            pass
         return msg
 
     async def boot(self):
