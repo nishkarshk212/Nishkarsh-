@@ -167,21 +167,19 @@ class Inline:
     def start_key(
         self, lang: dict, private: bool = False
     ) -> types.InlineKeyboardMarkup:
-        rows = [
-            [
-                self.ikb(
-                    text=lang["add_me"],
-                    url=f"https://t.me/{app.username}?startgroup=true"
-                )
-            ],
-            [self.ikb(text=lang["help"], callback_data="help")],
-            [
-                self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
-                self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
-            ],
-        ]
         if private:
-            rows += [
+            rows = [
+                [
+                    self.ikb(
+                        text=lang["add_me"],
+                        url=f"https://t.me/{app.username}?startgroup=true"
+                    )
+                ],
+                [self.ikb(text=lang["help"], callback_data="help")],
+                [
+                    self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
+                    self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
+                ],
                 [
                     self.ikb(text=lang["nishkarshowner"], user_id=config.OWNER_ID),
                     self.ikb(
@@ -191,7 +189,20 @@ class Inline:
                 ]
             ]
         else:
-            rows += [[self.ikb(text=lang["language"], callback_data="language")]]
+            rows = [
+                [
+                    self.ikb(
+                        text=lang["add_me"],
+                        url=f"https://t.me/{app.username}?startgroup=true"
+                    )
+                ],
+                [self.ikb(text=lang["help"], callback_data="help")],
+                [
+                    self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
+                    self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
+                ],
+                [self.ikb(text=lang["language"], callback_data="language")]
+            ]
         return self.ikm(rows)
 
     def yt_key(self, link: str) -> types.InlineKeyboardMarkup:

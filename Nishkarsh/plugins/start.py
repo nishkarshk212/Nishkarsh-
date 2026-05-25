@@ -30,6 +30,21 @@ async def start(_, message: types.Message):
     if len(message.command) > 1 and message.command[1] == "help":
         return await _help(_, message)
 
+    # React to the command
+    try:
+        await message.react("❤️")
+    except:
+        pass
+
+    # Send sticker
+    try:
+        sticker_set = await app.get_sticker_set("Nishkarsh5")
+        if sticker_set:
+            sticker = random.choice(sticker_set.stickers)
+            await message.reply_sticker(sticker.file_id)
+    except:
+        pass
+
     private = message.chat.type == enums.ChatType.PRIVATE
     _text = (
         message.lang["start_pm"].format(message.from_user.mention, app.mention)
