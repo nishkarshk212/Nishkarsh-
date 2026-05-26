@@ -24,6 +24,7 @@ class MongoDB:
         self.admin_play = []
         self.blacklisted = []
         self.cmd_delete = []
+        self.play_msg_delete = []
         self.notified = []
         self.cache = self.db.cache
         self.logger = False
@@ -211,12 +212,35 @@ class MongoDB:
 
     async def set_cmd_delete(self, chat_id: int, delete: bool = False) -> None:
         if delete:
-            self.cmd_delete.append(chat_id)
+            if chat_id not in self.cmd_delete:
+                self.cmd_delete.append(chat_id)
         else:
-            self.cmd_delete.remove(chat_id)
+            if chat_id in self.cmd_delete:
+                self.cmd_delete.remove(chat_id)
         await self.chatsdb.update_one(
             {"_id": chat_id},
             {"$set": {"cmd_delete": delete}},
+            upsert=True,
+        )
+
+    # PLAY MESSAGE DELETE
+    async def get_play_msg_delete(self, chat_id: int) -> bool:
+        if chat_id not in self.play_msg_delete:
+            doc = await self.chatsdb.find_one({"_id": chat_id})
+            if doc and doc.get("play_msg_delete"):
+                self.play_msg_delete.append(chat_id)
+        return chat_id in self.play_msg_delete
+
+    async def set_play_msg_delete(self, chat_id: int, delete: bool = False) -> None:
+        if delete:
+            if chat_id not in self.play_msg_delete:
+                self.play_msg_delete.append(chat_id)
+        else:
+            if chat_id in self.play_msg_delete:
+                self.play_msg_delete.remove(chat_id)
+        await self.chatsdb.update_one(
+            {"_id": chat_id},
+            {"$set": {"play_msg_delete": delete}},
             upsert=True,
         )
 

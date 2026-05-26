@@ -32,6 +32,12 @@ class TgCall(PyTgCalls):
     async def stop(self, chat_id: int) -> None:
         client = await db.get_assistant(chat_id)
         try:
+            current_media = queue.get_current(chat_id)
+            if current_media and await db.get_play_msg_delete(chat_id):
+                try:
+                    await app.delete_messages(chat_id, current_media.message_id)
+                except:
+                    pass
             queue.clear(chat_id)
             await db.remove_call(chat_id)
         except:
@@ -137,6 +143,13 @@ class TgCall(PyTgCalls):
 
 
     async def play_next(self, chat_id: int) -> None:
+        current_media = queue.get_current(chat_id)
+        if current_media and await db.get_play_msg_delete(chat_id):
+            try:
+                await app.delete_messages(chat_id, current_media.message_id)
+            except:
+                pass
+
         media = queue.get_next(chat_id)
         if not media:
             return await self.stop(chat_id)

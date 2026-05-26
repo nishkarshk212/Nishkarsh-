@@ -163,19 +163,24 @@ async def _settings_cb(_, query: types.CallbackQuery):
     chat_id = query.message.chat.id
     _admin = await db.get_play_mode(chat_id)
     _delete = await db.get_cmd_delete(chat_id)
+    _pdelete = await db.get_play_msg_delete(chat_id)
     _language = await db.get_lang(chat_id)
 
     if cmd[1] == "delete":
         _delete = not _delete
         await db.set_cmd_delete(chat_id, _delete)
+    elif cmd[1] == "pdelete":
+        _pdelete = not _pdelete
+        await db.set_play_msg_delete(chat_id, _pdelete)
     elif cmd[1] == "play":
-        await db.set_play_mode(chat_id, _admin)
         _admin = not _admin
+        await db.set_play_mode(chat_id, not _admin)
     await query.edit_message_reply_markup(
         reply_markup=buttons.settings_markup(
             query.lang,
             _admin,
             _delete,
+            _pdelete,
             _language,
             chat_id,
         )
