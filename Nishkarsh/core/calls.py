@@ -44,7 +44,8 @@ class TgCall(PyTgCalls):
             pass
 
         try:
-            await client.leave_call(chat_id, close=False)
+            if config.AUTO_LEAVE:
+                await client.leave_call(chat_id, close=False)
         except:
             pass
 
