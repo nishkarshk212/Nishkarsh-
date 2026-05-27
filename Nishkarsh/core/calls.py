@@ -79,7 +79,7 @@ class TgCall(PyTgCalls):
                 if media.video
                 else types.MediaStream.Flags.IGNORE
             ),
-            ffmpeg_parameters=f"-ss {seek_time} -preset superfast -acodec libopus -ac 2 -ar 48000" if seek_time > 1 else "-preset superfast -acodec libopus -ac 2 -ar 48000",
+            ffmpeg_parameters=f"-ss {seek_time} -re -f s16le -ac 2 -ar 48000 -acodec pcm_s16le" if seek_time > 1 else "-re -f s16le -ac 2 -ar 48000 -acodec pcm_s16le",
         )
         try:
             await client.play(
