@@ -70,7 +70,7 @@ class TgCall(PyTgCalls):
 
         stream = types.MediaStream(
             media_path=media.file_path,
-            audio_parameters=types.AudioQuality.MEDIUM,
+            audio_parameters=types.AudioQuality.HIGH,
             video_parameters=types.VideoQuality.HD_720p,
             audio_flags=types.MediaStream.Flags.REQUIRED,
             video_flags=(
@@ -78,7 +78,7 @@ class TgCall(PyTgCalls):
                 if media.video
                 else types.MediaStream.Flags.IGNORE
             ),
-            ffmpeg_parameters=f"-ss {seek_time} -re" if seek_time > 1 else "-re",
+            ffmpeg_parameters=f"-ss {seek_time} -preset superfast -acodec libopus -ac 2 -ar 48000" if seek_time > 1 else "-preset superfast -acodec libopus -ac 2 -ar 48000",
         )
         try:
             await client.play(
@@ -207,7 +207,7 @@ class TgCall(PyTgCalls):
     async def boot(self) -> None:
         PyTgCallsSession.notice_displayed = True
         for ub in userbot.clients:
-            client = PyTgCalls(ub, cache_duration=100)
+            client = PyTgCalls(ub, cache_duration=200)
             await client.start()
             self.clients.append(client)
             await self.decorators(client)
