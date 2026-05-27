@@ -23,7 +23,7 @@ class Config:
         self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/jayden_clan")
 
         self.AUTO_END = getenv("AUTO_END", "False").lower() in ("true", "1", "yes")
-        self.AUTO_LEAVE = getenv("AUTO_LEAVE", "False").lower() in ("true", "1", "yes")
+        self.AUTO_LEAVE = getenv("AUTO_LEAVE", "True").lower() in ("true", "1", "yes")
         self.VIDEO_PLAY = getenv("VIDEO_PLAY", "True").lower() in ("true", "1", "yes")
 
         self.QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", "50"))

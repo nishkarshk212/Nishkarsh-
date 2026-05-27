@@ -44,8 +44,7 @@ class TgCall(PyTgCalls):
             pass
 
         try:
-            if config.AUTO_LEAVE:
-                await client.leave_call(chat_id, close=False)
+            await client.leave_call(chat_id, close=False)
         except:
             pass
 
@@ -79,7 +78,7 @@ class TgCall(PyTgCalls):
                 if media.video
                 else types.MediaStream.Flags.IGNORE
             ),
-            ffmpeg_parameters=f"-ss {seek_time} -re -af 'volume=2.0'" if seek_time > 1 else "-re -af 'volume=2.0'",
+            ffmpeg_parameters=f"-ss {seek_time} -re ---mid -af volume=2.0" if seek_time > 1 else "-re ---mid -af volume=2.0",
         )
         try:
             await client.play(
