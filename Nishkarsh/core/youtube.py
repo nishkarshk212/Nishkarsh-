@@ -13,8 +13,7 @@ from py_yt import Playlist, VideosSearch
 from Nishkarsh import config, db, logger
 from Nishkarsh.helpers import Track, utils
 
-API_SONG = config.NEXTGEN_API_SONG
-API_VIDEO = config.NEXTGEN_API_VIDEO
+XBIT_API_URL = config.XBIT_API_URL
 DOWNLOAD_DIR = "downloads"
 
 class YouTube:
@@ -143,33 +142,39 @@ class YouTube:
 
         try:
             async with aiohttp.ClientSession() as session:
-                url = (API_VIDEO if video else API_SONG) + video_id
-                params = {"api": config.NEXTGEN_API_KEY}
+                url = f"{XBIT_API_URL}/info/{video_id}"
+                headers = {
+                    "x-api-key": config.XBIT_API_KEY,
+                    "Content-Type": "application/json"
+                }
                 
                 async with session.get(
                     url,
-                    params=params,
+                    headers=headers,
                     timeout=aiohttp.ClientTimeout(total=30),
                 ) as resp:
                     if resp.status == 200:
                         data = await resp.json()
-                        download_url = data.get("link")
-                        if download_url:
-                            # Download the actual file from the link
-                            async with session.get(
-                                download_url,
-                                timeout=aiohttp.ClientTimeout(total=600 if video else 300),
-                            ) as file_resp:
-                                if file_resp.status == 200:
-                                    await self._write_file(file_path, file_resp)
-                                elif file_resp.status == 302:
-                                    redirect_url = file_resp.headers.get('Location')
-                                    if redirect_url:
-                                        async with session.get(redirect_url) as final_resp:
-                                            if final_resp.status == 200:
-                                                await self._write_file(file_path, final_resp)
+                        if data.get("status") == "success":
+                            download_url = data.get("video_url" if video else "audio_url")
+                            if download_url:
+                                # Download the actual file from the link
+                                async with session.get(
+                                    download_url,
+                                    timeout=aiohttp.ClientTimeout(total=600 if video else 300),
+                                ) as file_resp:
+                                    if file_resp.status == 200:
+                                        await self._write_file(file_path, file_resp)
+                                    elif file_resp.status == 302:
+                                        redirect_url = file_resp.headers.get('Location')
+                                        if redirect_url:
+                                            async with session.get(redirect_url) as final_resp:
+                                                if final_resp.status == 200:
+                                                    await self._write_file(file_path, final_resp)
+                        else:
+                            logger.error(f"Xbit API error: {data.get('message')}. Trying fallback...")
                     else:
-                        logger.error(f"API returned status {resp.status} for {url}. Trying fallback...")
+                        logger.error(f"Xbit API returned status {resp.status} for {url}. Trying fallback...")
 
                 if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
                     logger.info(f"Downloaded: {file_path} ({os.path.getsize(file_path)} bytes)")

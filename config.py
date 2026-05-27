@@ -37,9 +37,8 @@ class Config:
         self.PING_IMG = getenv("PING_IMG", "https://files.catbox.moe/haagg2.png")
         self.START_IMG = getenv("START_IMG", "https://i.ibb.co/dwSr1BCH/071045e1b930a364060e7f853a6394b8.jpg https://i.ibb.co/QjxJJq4z/a543640d2cae1726345278d761180958.jpg https://i.ibb.co/VcFwYZj0/c94b8f6d7917e218e2494ef8dda9873c.jpg").split()
 
-        self.NEXTGEN_API_KEY = getenv("NEXTGEN_API_KEY", "NxGBNexGenBots08f955")
-        self.NEXTGEN_API_SONG = getenv("NEXTGEN_API_SONG", "https://pvtz.nexgenbots.xyz/song/")
-        self.NEXTGEN_API_VIDEO = getenv("NEXTGEN_API_VIDEO", "https://pvtz.nexgenbots.xyz/video/")
+        self.XBIT_API_KEY = getenv("XBIT_API_KEY", "xbit_40gZEycIlXXF38AlKKU4I96ZnNaiDFOV")
+        self.XBIT_API_URL = getenv("XBIT_API_URL", "https://tgapi.xbitcode.com")
 
     def check(self):
         missing = [
