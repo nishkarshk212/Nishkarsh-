@@ -79,7 +79,7 @@ class TgCall(PyTgCalls):
                 if media.video
                 else types.MediaStream.Flags.IGNORE
             ),
-            ffmpeg_parameters=f"-ss {seek_time} -re -f s16le -ac 2 -ar 48000 -acodec pcm_s16le" if seek_time > 1 else "-re -f s16le -ac 2 -ar 48000 -acodec pcm_s16le",
+            ffmpeg_parameters=f"-ss {seek_time} -re -af 'volume=2.0'" if seek_time > 1 else "-re -af 'volume=2.0'",
         )
         try:
             await client.play(
