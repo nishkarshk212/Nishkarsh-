@@ -25,6 +25,7 @@ class MongoDB:
         self.blacklisted = []
         self.cmd_delete = []
         self.play_msg_delete = []
+        self.ads_blocked = []
         self.notified = []
         self.cache = self.db.cache
         self.logger = False
@@ -241,6 +242,27 @@ class MongoDB:
         await self.chatsdb.update_one(
             {"_id": chat_id},
             {"$set": {"play_msg_delete": delete}},
+            upsert=True,
+        )
+
+    # ADS BLOCKING
+    async def get_ads_blocked(self, chat_id: int) -> bool:
+        if chat_id not in self.ads_blocked:
+            doc = await self.chatsdb.find_one({"_id": chat_id})
+            if doc and doc.get("ads_blocked"):
+                self.ads_blocked.append(chat_id)
+        return chat_id in self.ads_blocked
+
+    async def set_ads_blocked(self, chat_id: int, block: bool = False) -> None:
+        if block:
+            if chat_id not in self.ads_blocked:
+                self.ads_blocked.append(chat_id)
+        else:
+            if chat_id in self.ads_blocked:
+                self.ads_blocked.remove(chat_id)
+        await self.chatsdb.update_one(
+            {"_id": chat_id},
+            {"$set": {"ads_blocked": block}},
             upsert=True,
         )
 

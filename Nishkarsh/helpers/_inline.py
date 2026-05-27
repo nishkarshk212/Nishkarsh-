@@ -136,7 +136,7 @@ class Inline:
         )
 
     def settings_markup(
-        self, lang: dict, admin_only: bool, cmd_delete: bool, play_message_delete: bool, language: str, chat_id: int
+        self, lang: dict, admin_only: bool, cmd_delete: bool, play_message_delete: bool, ads_blocked: bool, language: str, chat_id: int
     ) -> types.InlineKeyboardMarkup:
         return self.ikm(
             [
@@ -160,6 +160,13 @@ class Inline:
                         callback_data="settings",
                     ),
                     self.ikb(text="✅" if play_message_delete else "❌", callback_data="settings pdelete"),
+                ],
+                [
+                    self.ikb(
+                        text=lang.get("ads_blocking", "Ads Blocking") + " ➜",
+                        callback_data="settings",
+                    ),
+                    self.ikb(text="✅" if ads_blocked else "❌", callback_data="settings ads"),
                 ],
                 [
                     self.ikb(

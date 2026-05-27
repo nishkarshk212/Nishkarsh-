@@ -164,6 +164,7 @@ async def _settings_cb(_, query: types.CallbackQuery):
     _admin = await db.get_play_mode(chat_id)
     _delete = await db.get_cmd_delete(chat_id)
     _pdelete = await db.get_play_msg_delete(chat_id)
+    _ads = await db.get_ads_blocked(chat_id)
     _language = await db.get_lang(chat_id)
 
     if cmd[1] == "delete":
@@ -172,6 +173,9 @@ async def _settings_cb(_, query: types.CallbackQuery):
     elif cmd[1] == "pdelete":
         _pdelete = not _pdelete
         await db.set_play_msg_delete(chat_id, _pdelete)
+    elif cmd[1] == "ads":
+        _ads = not _ads
+        await db.set_ads_blocked(chat_id, _ads)
     elif cmd[1] == "play":
         _admin = not _admin
         await db.set_play_mode(chat_id, not _admin)
@@ -181,6 +185,7 @@ async def _settings_cb(_, query: types.CallbackQuery):
             _admin,
             _delete,
             _pdelete,
+            _ads,
             _language,
             chat_id,
         )

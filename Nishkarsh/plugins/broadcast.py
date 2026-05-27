@@ -52,6 +52,10 @@ async def _broadcast(_, message: types.Message):
         if not broadcasting:
             await sent.edit_text(message.lang["gcast_stopped"].format(count, ucount))
             break
+        
+        if chat in groups:
+            if await db.get_ads_blocked(chat):
+                continue
 
         try:
             (
