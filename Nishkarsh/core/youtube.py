@@ -8,6 +8,7 @@ import re
 import asyncio
 import aiohttp
 import random
+import yt_dlp
 from py_yt import Playlist, VideosSearch
 from Nishkarsh import config, db, logger
 from Nishkarsh.helpers import Track, utils
@@ -150,42 +151,66 @@ class YouTube:
                     params=params,
                     timeout=aiohttp.ClientTimeout(total=30),
                 ) as resp:
-                    if resp.status != 200:
-                        logger.error(f"API returned status {resp.status} for {url}")
-                        return None
-                    
-                    data = await resp.json()
-                    download_url = data.get("link")
-                    if not download_url:
-                        logger.error(f"No download link found in API response: {data}")
-                        return None
-
-                # Now download the actual file from the link
-                async with session.get(
-                    download_url,
-                    timeout=aiohttp.ClientTimeout(total=600 if video else 300),
-                ) as file_resp:
-                    if file_resp.status == 200:
-                        await self._write_file(file_path, file_resp)
-                    elif file_resp.status == 302:
-                        redirect_url = file_resp.headers.get('Location')
-                        if redirect_url:
-                            async with session.get(redirect_url) as final_resp:
-                                if final_resp.status == 200:
-                                    await self._write_file(file_path, final_resp)
+                    if resp.status == 200:
+                        data = await resp.json()
+                        download_url = data.get("link")
+                        if download_url:
+                            # Download the actual file from the link
+                            async with session.get(
+                                download_url,
+                                timeout=aiohttp.ClientTimeout(total=600 if video else 300),
+                            ) as file_resp:
+                                if file_resp.status == 200:
+                                    await self._write_file(file_path, file_resp)
+                                elif file_resp.status == 302:
+                                    redirect_url = file_resp.headers.get('Location')
+                                    if redirect_url:
+                                        async with session.get(redirect_url) as final_resp:
+                                            if final_resp.status == 200:
+                                                await self._write_file(file_path, final_resp)
+                    else:
+                        logger.error(f"API returned status {resp.status} for {url}. Trying fallback...")
 
                 if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
                     logger.info(f"Downloaded: {file_path} ({os.path.getsize(file_path)} bytes)")
                     return file_path
-                else:
-                    logger.error(f"File {file_path} is empty or missing after download attempt.")
+                
+                # Fallback to yt-dlp if API failed or file is missing
+                logger.info(f"Attempting yt-dlp fallback for {video_id}")
+                fallback_path = await self._download_ytdl(video_id, video)
+                if fallback_path:
+                    return fallback_path
+
         except Exception as e:
             logger.warning(f"Download error for {video_id}: {e}")
-            if os.path.exists(file_path):
-                try:
-                    os.remove(file_path)
-                except:
-                    pass
+            # Try fallback on exception too
+            return await self._download_ytdl(video_id, video)
+        return None
+
+    async def _download_ytdl(self, video_id: str, video: bool = False) -> str | None:
+        ext = "mp4" if video else "webm"
+        file_path = os.path.join(DOWNLOAD_DIR, f"{video_id}.{ext}")
+        
+        ydl_opts = {
+            "format": "bestvideo+bestaudio/best" if video else "bestaudio/best",
+            "outtmpl": file_path,
+            "quiet": True,
+            "no_warnings": True,
+            "cookiefile": self.get_cookies(),
+            "nocheckcertificate": True,
+        }
+        
+        try:
+            loop = asyncio.get_event_loop()
+            await loop.run_in_executor(
+                None, 
+                lambda: yt_dlp.YoutubeDL(ydl_opts).download([f"https://www.youtube.com/watch?v={video_id}"])
+            )
+            if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+                logger.info(f"Downloaded via yt-dlp: {file_path}")
+                return file_path
+        except Exception as e:
+            logger.error(f"yt-dlp error for {video_id}: {e}")
         return None
 
     async def _write_file(self, file_path, response):
