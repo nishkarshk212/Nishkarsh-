@@ -68,6 +68,10 @@ class TgCall(PyTgCalls):
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             return await self.play_next(chat_id)
 
+        is_url = media.file_path and (media.file_path.startswith("http://") or media.file_path.startswith("https://"))
+        audio_filter = "-af dynaudnorm=p=0.9:maxgain=5"
+        input_opts = "" if is_url else "-re"
+        ffmpeg_params = f"-ss {seek_time} {input_opts} ---mid {audio_filter}" if seek_time > 1 else f"{input_opts} ---mid {audio_filter}"
         stream = types.MediaStream(
             media_path=media.file_path,
             audio_parameters=types.AudioQuality.HIGH,
@@ -78,7 +82,7 @@ class TgCall(PyTgCalls):
                 if media.video
                 else types.MediaStream.Flags.IGNORE
             ),
-            ffmpeg_parameters=f"-ss {seek_time} -re ---mid -af volume=2.0" if seek_time > 1 else "-re ---mid -af volume=2.0",
+            ffmpeg_parameters=ffmpeg_params,
         )
         try:
             await client.play(
