@@ -147,45 +147,51 @@ class TgCall(PyTgCalls):
 
 
     async def play_next(self, chat_id: int) -> None:
-        current_media = queue.get_current(chat_id)
-        if current_media and await db.get_play_msg_delete(chat_id):
+        try:
+            current_media = queue.get_current(chat_id)
+            if current_media and await db.get_play_msg_delete(chat_id):
+                try:
+                    await app.delete_messages(chat_id, current_media.message_id)
+                except:
+                    pass
+
+            media = queue.get_next(chat_id)
+            if not media:
+                logger.info(f"Queue empty for {chat_id}, stopping")
+                return await self.stop(chat_id)
+
             try:
-                await app.delete_messages(chat_id, current_media.message_id)
+                if media.message_id:
+                    await app.delete_messages(
+                        chat_id=chat_id,
+                        message_ids=media.message_id,
+                        revoke=True,
+                    )
+                    media.message_id = 0
             except:
                 pass
 
-        media = queue.get_next(chat_id)
-        if not media:
-            return await self.stop(chat_id)
-
-        try:
-            if media.message_id:
-                await app.delete_messages(
-                    chat_id=chat_id,
-                    message_ids=media.message_id,
-                    revoke=True,
-                )
-                media.message_id = 0
-        except:
-            pass
-
-        _lang = await lang.get_lang(chat_id)
-        msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"], disable_web_page_preview=True)
-        if not media.file_path:
-            media.file_path = await yt.download(media.id, video=media.video)
+            _lang = await lang.get_lang(chat_id)
+            msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"], disable_web_page_preview=True)
             if not media.file_path:
-                await msg.edit_text(
-                    f"Download failed for **{media.title}**. Skipping to next track..."
-                )
-                await asyncio.sleep(2)
-                try:
-                    await msg.delete()
-                except:
-                    pass
-                return await self.play_next(chat_id)
+                media.file_path = await yt.download(media.id, video=media.video)
+                if not media.file_path:
+                    await msg.edit_text(
+                        f"Download failed for **{media.title}**. Skipping to next track..."
+                    )
+                    await asyncio.sleep(2)
+                    try:
+                        await msg.delete()
+                    except:
+                        pass
+                    return await self.play_next(chat_id)
 
-        media.message_id = msg.id
-        await self.play_media(chat_id, msg, media)
+            media.message_id = msg.id
+            await self.play_media(chat_id, msg, media)
+        except Exception as e:
+            logger.error(f"play_next error for {chat_id}: {e}")
+            await asyncio.sleep(1)
+            await self.play_next(chat_id)
 
 
     async def ping(self) -> float:
