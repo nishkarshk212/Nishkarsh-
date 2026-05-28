@@ -3,6 +3,7 @@
 # This file is part of NishkarshMusic
 #ALONE-CODER
 
+import asyncio
 from pathlib import Path
 
 from pyrogram import filters, types
@@ -118,7 +119,7 @@ async def play_hndlr(
             return
 
     if not file.file_path:
-        fname = f"downloads/{file.id}.{'mp4' if video else 'webm'}"
+        fname = f"downloads/{file.id}.{'mp4' if video else 'm4a'}"
         path = Path(fname)
         if path.exists() and path.stat().st_size > 0:
             file.file_path = fname

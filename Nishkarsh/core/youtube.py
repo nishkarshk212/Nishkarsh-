@@ -134,7 +134,7 @@ class YouTube:
             return None
 
         os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-        ext = "mp4" if video else "webm"
+        ext = "mp4" if video else "m4a"
         file_path = os.path.join(DOWNLOAD_DIR, f"{video_id}.{ext}")
 
         if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
@@ -165,12 +165,6 @@ class YouTube:
                                 ) as file_resp:
                                     if file_resp.status == 200:
                                         await self._write_file(file_path, file_resp)
-                                    elif file_resp.status == 302:
-                                        redirect_url = file_resp.headers.get('Location')
-                                        if redirect_url:
-                                            async with session.get(redirect_url) as final_resp:
-                                                if final_resp.status == 200:
-                                                    await self._write_file(file_path, final_resp)
                         else:
                             logger.error(f"Xbit API error: {data.get('message')}. Trying fallback...")
                     else:
@@ -193,16 +187,21 @@ class YouTube:
         return None
 
     async def _download_ytdl(self, video_id: str, video: bool = False) -> str | None:
-        ext = "mp4" if video else "webm"
+        ext = "mp4" if video else "m4a"
         file_path = os.path.join(DOWNLOAD_DIR, f"{video_id}.{ext}")
         
         ydl_opts = {
-            "format": "bestvideo+bestaudio/best" if video else "bestaudio/best",
+            "format": "bestaudio[ext=m4a]/bestaudio/best" if not video else "best[height<=720]/best",
             "outtmpl": file_path,
             "quiet": True,
             "no_warnings": True,
             "cookiefile": self.get_cookies(),
             "nocheckcertificate": True,
+            "extractor_args": {"youtube": {"skip": ["dash", "hls"]}},
+            "http_headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+            "extract_flat": False,
+            "retries": 3,
+            "fragment_retries": 3,
         }
         
         try:
