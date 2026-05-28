@@ -140,6 +140,14 @@ class YouTube:
         if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
             return file_path
 
+        xbit_url = await self._try_xbit(video_id, video)
+        if xbit_url:
+            return xbit_url
+
+        logger.info(f"Attempting yt-dlp fallback for {video_id}")
+        return await self._download_ytdl(video_id, video)
+
+    async def _try_xbit(self, video_id: str, video: bool = False) -> str | None:
         try:
             async with aiohttp.ClientSession() as session:
                 url = f"{XBIT_API_URL}/info/{video_id}"
@@ -147,7 +155,6 @@ class YouTube:
                     "x-api-key": config.XBIT_API_KEY,
                     "Content-Type": "application/json"
                 }
-                
                 async with session.get(
                     url,
                     headers=headers,
@@ -156,40 +163,22 @@ class YouTube:
                     if resp.status == 200:
                         data = await resp.json()
                         if data.get("status") == "success":
-                            download_url = data.get("video_url" if video else "audio_url")
-                            if download_url:
-                                # Download the actual file from the link
-                                async with session.get(
-                                    download_url,
-                                    timeout=aiohttp.ClientTimeout(total=600 if video else 300),
-                                ) as file_resp:
-                                    if file_resp.status == 200:
-                                        await self._write_file(file_path, file_resp)
+                            stream_url = data.get("video_url" if video else "audio_url")
+                            if stream_url:
+                                logger.info(f"Streaming {video_id} from XBIT API")
+                                return stream_url
                         else:
-                            logger.error(f"Xbit API error: {data.get('message')}. Trying fallback...")
+                            logger.warning("Xbit API error for " + video_id + ": " + str(data.get("message")))
                     else:
-                        logger.error(f"Xbit API returned status {resp.status} for {url}. Trying fallback...")
-
-                if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
-                    logger.info(f"Downloaded: {file_path} ({os.path.getsize(file_path)} bytes)")
-                    return file_path
-                
-                # Fallback to yt-dlp if API failed or file is missing
-                logger.info(f"Attempting yt-dlp fallback for {video_id}")
-                fallback_path = await self._download_ytdl(video_id, video)
-                if fallback_path:
-                    return fallback_path
-
+                        logger.warning("Xbit API returned status " + str(resp.status) + " for " + video_id)
         except Exception as e:
-            logger.warning(f"Download error for {video_id}: {e}")
-            # Try fallback on exception too
-            return await self._download_ytdl(video_id, video)
+            logger.warning("Xbit API exception for " + video_id + ": " + str(e))
         return None
 
     async def _download_ytdl(self, video_id: str, video: bool = False) -> str | None:
         ext = "mp4" if video else "m4a"
         file_path = os.path.join(DOWNLOAD_DIR, f"{video_id}.{ext}")
-        
+
         ydl_opts = {
             "format": "bestaudio[ext=m4a]/bestaudio/best" if not video else "best[height<=720]/best",
             "outtmpl": file_path,
@@ -203,11 +192,11 @@ class YouTube:
             "retries": 3,
             "fragment_retries": 3,
         }
-        
+
         try:
             loop = asyncio.get_event_loop()
             await loop.run_in_executor(
-                None, 
+                None,
                 lambda: yt_dlp.YoutubeDL(ydl_opts).download([f"https://www.youtube.com/watch?v={video_id}"])
             )
             if os.path.exists(file_path) and os.path.getsize(file_path) > 0:

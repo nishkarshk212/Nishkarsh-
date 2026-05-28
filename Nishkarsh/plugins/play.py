@@ -3,7 +3,6 @@
 # This file is part of NishkarshMusic
 #ALONE-CODER
 
-import asyncio
 from pathlib import Path
 
 from pyrogram import filters, types
@@ -114,8 +113,6 @@ async def play_hndlr(
                     disable_web_page_preview=True,
                 )
             
-            # Download queued song in background
-            asyncio.create_task(yt.download(file.id, video=video))
             return
 
     if not file.file_path:
@@ -128,11 +125,6 @@ async def play_hndlr(
             file.file_path = await yt.download(file.id, video=video)
             if not file.file_path:
                 return await sent.edit_text(m.lang["error_no_file"].format(config.SUPPORT_CHAT))
-
-    # Pre-download next song if it exists in queue
-    next_track = queue.get_next(m.chat.id, check=True)
-    if next_track:
-        asyncio.create_task(yt.download(next_track.id, video=next_track.video))
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
     if not tracks:
