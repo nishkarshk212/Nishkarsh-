@@ -144,8 +144,11 @@ class YouTube:
         if xbit_url:
             return xbit_url
 
-        logger.info(f"Attempting yt-dlp fallback for {video_id}")
-        return await self._download_ytdl(video_id, video)
+    logger.info(f"Attempting yt-dlp fallback for {video_id}")
+    file_path = await self._download_ytdl(video_id, video)
+    if not file_path:
+        logger.warning(f"All download methods failed for {video_id}")
+    return file_path
 
     async def _try_xbit(self, video_id: str, video: bool = False) -> str | None:
         try:

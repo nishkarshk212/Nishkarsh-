@@ -2,3 +2,9 @@
 __pycache__/
 *.pyc
 downloads/
+
+Nishkarsh.session
+cache/
+*.log
+*.txt
+unknown_errors.txt
