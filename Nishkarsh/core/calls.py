@@ -187,6 +187,7 @@ class TgCall(PyTgCalls):
                     return await self.play_next(chat_id)
 
             media.message_id = msg.id
+            await asyncio.sleep(1)
             await self.play_media(chat_id, msg, media)
         except Exception as e:
             logger.error(f"play_next error for {chat_id}: {e}")

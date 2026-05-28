@@ -168,8 +168,11 @@ class YouTube:
                         if data.get("status") == "success":
                             stream_url = data.get("video_url" if video else "audio_url")
                             if stream_url:
-                                logger.info(f"Streaming {video_id} from XBIT API")
-                                return stream_url
+                                if await self._verify_url(session, stream_url):
+                                    logger.info(f"Streaming {video_id} from XBIT API")
+                                    return stream_url
+                                else:
+                                    logger.warning(f"XBIT stream URL invalid for {video_id}, falling back")
                         else:
                             logger.warning("Xbit API error for " + video_id + ": " + str(data.get("message")))
                     else:
@@ -177,6 +180,23 @@ class YouTube:
         except Exception as e:
             logger.warning("Xbit API exception for " + video_id + ": " + str(e))
         return None
+
+    async def _verify_url(self, session: aiohttp.ClientSession, url: str) -> bool:
+        try:
+            async with session.head(
+                url,
+                timeout=aiohttp.ClientTimeout(total=10),
+                allow_redirects=True,
+            ) as resp:
+                if resp.status == 405:
+                    async with session.get(
+                        url, headers={"Range": "bytes=0-1"},
+                        timeout=aiohttp.ClientTimeout(total=10),
+                    ) as get_resp:
+                        return get_resp.status in (200, 206)
+                return resp.status == 200
+        except:
+            return False
 
     async def _download_ytdl(self, video_id: str, video: bool = False) -> str | None:
         ext = "mp4" if video else "m4a"
