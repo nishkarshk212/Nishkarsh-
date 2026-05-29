@@ -69,7 +69,7 @@ class TgCall(PyTgCalls):
             return await self.play_next(chat_id)
 
         is_url = media.file_path and (media.file_path.startswith("http://") or media.file_path.startswith("https://"))
-        audio_filter = "-af dynaudnorm=p=0.9:maxgain=5"
+        audio_filter = "-af dynaudnorm=p=0.9:maxgain=5:framelen=200"
         input_opts = "-reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 5" if is_url else "-re"
         ffmpeg_params = f"-ss {seek_time} {input_opts} ---mid {audio_filter}" if seek_time > 1 else f"{input_opts} ---mid {audio_filter}"
         stream = types.MediaStream(
