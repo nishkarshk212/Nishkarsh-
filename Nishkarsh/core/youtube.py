@@ -183,18 +183,19 @@ class YouTube:
 
     async def _verify_url(self, session: aiohttp.ClientSession, url: str) -> bool:
         try:
-            async with session.head(
+            headers = {"Range": "bytes=0-2047"}
+            async with session.get(
                 url,
+                headers=headers,
                 timeout=aiohttp.ClientTimeout(total=10),
                 allow_redirects=True,
             ) as resp:
-                if resp.status == 405:
-                    async with session.get(
-                        url, headers={"Range": "bytes=0-1"},
-                        timeout=aiohttp.ClientTimeout(total=10),
-                    ) as get_resp:
-                        return get_resp.status in (200, 206)
-                return resp.status == 200
+                if resp.status not in (200, 206):
+                    return False
+                data = await resp.read()
+                if len(data) < 32:
+                    return False
+                return True
         except:
             return False
 
